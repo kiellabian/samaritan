@@ -12,7 +12,6 @@ def _tag_sentence(sentence):
     for x in p:
         if len(x[1]) > 1:
             tags.append(x[1])
-    print tags
     return tags
 
 
@@ -25,7 +24,6 @@ def _read(filepath):
             if len(line) > 0:
                 final_text += ' ' + line.decode('utf-8')
     final_text = re.sub('".*?"', '', final_text)
-    print final_text
     return final_text
 
 
@@ -42,4 +40,4 @@ def tag(filepath):
             print tags
             f.write(tags + '\n')
 
-print tag('dataset/greate_expectations_by_charles_dickens.txt')
+print tag('dataset/david_copperfied_by_charles_dickens.txt')
