@@ -15,6 +15,25 @@ def _tag_sentence(sentence):
     return tags
 
 
+def tag_text(text, output_path=None):
+    """ pos tags the sentences in a string """
+    if output_path:
+        f = open(output_path, 'a')
+    result = []
+    tokenizer = data.load('tokenizers/punkt/english.pickle')
+    sentences = tokenizer.tokenize(text)
+    for sentence in sentences:
+        tags = _tag_sentence(sentence)
+        result.append(tags)
+        tags = ' '.join(tags)
+        print tags
+        if output_path:
+            f.write(tags + '\n')
+    if output_path:
+        f.close()
+    return result
+
+
 def _read(filepath):
     """ read file and return a single string of the content of the file."""
     final_text = ''
@@ -30,14 +49,7 @@ def _read(filepath):
 def tag(filepath):
     print filepath
     text = _read(filepath)
-    tokenizer = data.load('tokenizers/punkt/english.pickle')
-    sentences = tokenizer.tokenize(text)
     output_path = re.sub('\..*', '.pos', filepath)
-    with open(output_path, 'a') as f:
-        for sentence in sentences:
-            tags = _tag_sentence(sentence)
-            tags = ' '.join(tags)
-            print tags
-            f.write(tags + '\n')
+    tag_text(text, output_path=output_path)
 
-print tag('dataset/david_copperfied_by_charles_dickens.txt')
+print tag('dataset/arthur_conan_doyle__the_valley_of_fear.txt')
