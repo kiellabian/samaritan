@@ -52,4 +52,4 @@ def tag(filepath):
     output_path = re.sub('\..*', '.pos', filepath)
     tag_text(text, output_path=output_path)
 
-print tag('dataset/arthur_conan_doyle__the_valley_of_fear.txt')
+# print tag('dataset/joseph_conrad__under_western_eyes.txt')

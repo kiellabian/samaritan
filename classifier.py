@@ -6,6 +6,7 @@ from nltk import classify
 from sklearn import cross_validation
 from sklearn.metrics import classification_report
 
+
 class Classifier:
     def __init__(self, classifier, feature_set):
         size = int(len(feature_set) * 0.8)
