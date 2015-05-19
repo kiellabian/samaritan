@@ -19,6 +19,7 @@ def tag_text(text, output_path=None):
     """ pos tags the sentences in a string """
     if output_path:
         f = open(output_path, 'a')
+    text = text.decode('utf-8')
     result = []
     tokenizer = data.load('tokenizers/punkt/english.pickle')
     sentences = tokenizer.tokenize(text)
@@ -26,7 +27,6 @@ def tag_text(text, output_path=None):
         tags = _tag_sentence(sentence)
         result.append(tags)
         tags = ' '.join(tags)
-        print tags
         if output_path:
             f.write(tags + '\n')
     if output_path:

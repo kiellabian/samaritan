@@ -30,6 +30,8 @@ def get_data(number_of_sentences=50):
     paths = __get_file_paths('dataset')
     dataset = []
     for path in paths:
+        if path[1].find('.pos') == -1:
+            continue
         with open(path[0]) as f:
             index = path[1].index('__')
             cls = path[1][:index]
