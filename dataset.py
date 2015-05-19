@@ -26,9 +26,10 @@ def __convern_to_count_dictionary(sentences, n_gram=4):
     return features
 
 
-def get_data(number_of_sentences=50, n_gram=4):
+def get_data(number_of_sentences=50, number_of_authors=10):
     paths = __get_file_paths('dataset')
     dataset = []
+    paths = paths[:number_of_authors * 5]
     for path in paths:
         if path[1].find('.pos') == -1:
             continue
