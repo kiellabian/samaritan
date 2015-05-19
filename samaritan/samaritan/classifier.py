@@ -159,13 +159,8 @@ class Classifier(object):
         plt.legend(loc='lower right')
         plt.show()
 
-try:
-    open('clf.pkl')
-    c = joblib.load('clf.pkl')
-    author_classifier = Classifier(c, feature_set)
-except:
-    feature_set = dataset.get_data(number_of_sentences=100, n_gram=4)
-    c = SklearnClassifier(Pipeline([('clf', LinearSVC(C=0.8))]))
-    author_classifier = Classifier(c, feature_set)
-    author_classifier.train(cross_val=True)
-    joblib.dump(author_classifier.classifier, 'clf.pkl')
+
+feature_set = dataset.get_data(number_of_sentences=100, n_gram=4)
+c = SklearnClassifier(Pipeline([('clf', LinearSVC(C=0.8))]))
+author_classifier = Classifier(c, feature_set)
+author_classifier.train(cross_val=True)
