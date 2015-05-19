@@ -8,6 +8,8 @@ from nltk import classify
 from sklearn import cross_validation
 from sklearn.metrics import classification_report, f1_score
 
+import dataset
+
 
 class Classifier:
     def __init__(self, classifier, feature_set):
@@ -43,6 +45,7 @@ class Classifier:
             features.append(feat)
             labels.append(label)
         predictions = self.classifier.classify_many(features)
+
         print classification_report(predictions, labels)
         fscore = f1_score(predictions, labels)
         return accuracy, fscore
@@ -87,5 +90,29 @@ class Classifier:
         plt.plot(data_sizes, fscores, label='F1-score', linewidth=3)
         plt.title('Learning Curves')
         plt.xlabel('Dataset Size')
+        plt.legend(loc='lower right')
+        plt.show()
+
+    def plot_performance(self, num_of_authors=10):
+        accuracies = []
+        fscores = []
+        for authors_ctr in range(3, num_of_authors+1):
+            self.feature_set = dataset.get_data(
+                number_of_sentences=200,
+                number_of_authors=authors_ctr
+            )
+            random.shuffle(self.feature_set)
+            curr_size = int(len(self.feature_set) * 0.8)
+            self.train_set = self.feature_set[:curr_size]
+            self.test_set = self.feature_set[curr_size:]
+    
+            self.train()
+            accuracy, fscore = self.test()
+            accuracies.append(accuracy)
+            fscores.append(fscore)
+
+        plt.plot(range(3, num_of_authors + 1), accuracies, label='Accuracy', linewidth=2)
+        plt.plot(range(3, num_of_authors + 1), fscores, label='F1-score', linewidth=2)
+        plt.xlabel('Number of authors')
         plt.legend(loc='lower right')
         plt.show()

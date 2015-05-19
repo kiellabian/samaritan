@@ -18,8 +18,9 @@ c = SklearnClassifier(Pipeline([('tfidf', TfidfTransformer()),
                       ('clf', LinearSVC(C=2))]))
 
 classifier = Classifier(c, feature_set)
-classifier.train()
-classifier.test()
+classifier.plot_performance()
+# classifier.train()
+# classifier.test()
 
 t = 'a'
 while t != '':
