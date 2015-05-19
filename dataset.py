@@ -23,10 +23,17 @@ def __convern_to_count_dictionary(sentences, n_gram=4):
                     features[feat] += 1
                 else:
                     features[feat] = 1
+        # for feat in ngrams(sentence, n_gram):
+        #     feat = ' '.join(feat)
+        #     if feat in features:
+        #         features[feat] += 1
+        #     else:
+        #         features[feat] = 1
     return features
 
 
-def get_data(number_of_sentences=50, number_of_authors=10):
+def get_data(number_of_sentences=50, number_of_authors=10, n_gram=4):
+    print n_gram
     paths = __get_file_paths('dataset')
     dataset = []
     paths = paths[:number_of_authors * 5]
