@@ -32,6 +32,10 @@ def __convern_to_count_dictionary(sentences, n_gram=4):
     return features
 
 
+def convert_to_count_dictionary(sentences, n_gram=4):
+    return __convern_to_count_dictionary(sentences, n_gram)
+
+
 def get_data(number_of_sentences=50, number_of_authors=10, n_gram=4):
     print n_gram
     paths = __get_file_paths('dataset')
