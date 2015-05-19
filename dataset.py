@@ -26,7 +26,7 @@ def __convern_to_count_dictionary(sentences, n_gram=4):
     return features
 
 
-def get_data(number_of_sentences=50):
+def get_data(number_of_sentences=50, n_gram=4):
     paths = __get_file_paths('dataset')
     dataset = []
     for path in paths:
@@ -43,12 +43,12 @@ def get_data(number_of_sentences=50):
                 sentences.append(line)
                 count += 1
                 if count == number_of_sentences:
-                    features = __convern_to_count_dictionary(sentences)
+                    features = __convern_to_count_dictionary(sentences, n_gram)
                     dataset.append((features, cls))
                     sentences = []
                     count = 0
                 line = f.readline()
-            features = __convern_to_count_dictionary(sentences)
+            features = __convern_to_count_dictionary(sentences, n_gram)
             dataset.append((features, cls))
     return dataset
     

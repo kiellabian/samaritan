@@ -11,8 +11,9 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfTransformer
 
+n_gram = 4
 
-feature_set = dataset.get_data(number_of_sentences=200)
+feature_set = dataset.get_data(number_of_sentences=50, n_gram=n_gram)
 
 c = SklearnClassifier(Pipeline([('tfidf', TfidfTransformer()),
                       ('clf', LinearSVC(C=2))]))
@@ -26,5 +27,5 @@ while t != '':
     t = raw_input('>')
     if t:
         tags = tag_text(t)
-        features = dataset.__convern_to_count_dictionary(tags)
+        features = dataset.__convern_to_count_dictionary(tags,n_gram=n)
         classifier.predict(features)
